@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-
+import formatUTCDate from './utils.js';
 const app = express();
 
 var corOptions = {
@@ -38,7 +38,7 @@ app.route('/api').get((req, res) => {
         return res.status(200).send({
             "slack_name": "Genevieve Ikechukwu",
             "current_day": dayName,
-            "utc_time": currentDate.toISOString(),
+            "utc_time": formatUTCDate(currentDate),
             "track": "backend",
             "github_file_url": "https://github.com/username/repo/blob/main/file_name.ext",
             "github_repo_url": "https://github.com/username/repo",
