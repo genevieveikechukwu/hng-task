@@ -10,7 +10,7 @@ export const createHandler = async (req: Request, res: Response) => {
         const isUser = await UserModel.findOne({ fullName: smallName })
         if (isUser) return res.status(400).send({ message: "User with name already exists!" })
         const user = await UserModel.create({ fullName: smallName })
-        return res.status(200).send({ message: "Successfully created!!", data: user })
+        return res.status(201).send({ message: "Successfully created!!", data: user })
     } catch (error: any) {
         return res.status(500).send({ message: error.message })
     }
