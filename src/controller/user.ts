@@ -43,6 +43,7 @@ export const updateHandler = async (req: Request, res: Response) => {
         const isUser = await UserModel.findOne({ fullName: smallName })
         if (isUser) return res.status(400).send({ message: "User with name already exists!" })
         await user.updateOne({ smallName });
+        await user.save()
         return res.status(200).send({ message: "Successfully updated!!" })
     } catch (error: any) {
         return res.status(500).send({ message: error.message })

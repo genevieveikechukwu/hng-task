@@ -60,6 +60,7 @@ const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         if (isUser)
             return res.status(400).send({ message: "User with name already exists!" });
         yield user.updateOne({ smallName });
+        yield user.save();
         return res.status(200).send({ message: "Successfully updated!!" });
     }
     catch (error) {
