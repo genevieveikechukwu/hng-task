@@ -17,7 +17,7 @@ exports.HngUser = HngUser;
 __decorate([
     (0, typegoose_1.prop)(),
     __metadata("design:type", String)
-], HngUser.prototype, "fullName", void 0);
+], HngUser.prototype, "name", void 0);
 exports.HngUser = HngUser = __decorate([
     (0, typegoose_1.index)({ fullName: 1 })
 ], HngUser);

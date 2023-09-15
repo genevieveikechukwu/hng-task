@@ -16,14 +16,14 @@ exports.deleteHandler = exports.updateHandler = exports.getHandler = exports.cre
 const user_1 = __importDefault(require("../models/user"));
 const createHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { fullName } = req.body;
-        if (!fullName)
-            return res.status(400).send({ message: "fullName is required!!" });
-        let smallName = fullName.toLowerCase();
-        const isUser = yield user_1.default.findOne({ fullName: smallName });
+        const { name } = req.body;
+        if (!name)
+            return res.status(400).send({ message: "name is required!!" });
+        let smallName = name.toLowerCase();
+        const isUser = yield user_1.default.findOne({ name: smallName });
         if (isUser)
             return res.status(400).send({ message: "User with name already exists!" });
-        const user = yield user_1.default.create({ fullName: smallName });
+        const user = yield user_1.default.create({ name: smallName });
         return res.status(201).send({ message: "Successfully created!!", data: user });
     }
     catch (error) {
@@ -34,7 +34,7 @@ exports.createHandler = createHandler;
 const getHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        let user = yield user_1.default.findOne({ fullName: new RegExp(id, 'i') });
+        let user = yield user_1.default.findOne({ name: new RegExp(id, 'i') });
         if (!user) {
             return res.status(404).send({ message: "user with name does not exist" });
         }
@@ -48,18 +48,18 @@ exports.getHandler = getHandler;
 const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const { fullName } = req.body;
-        let smallName = fullName.toLowerCase();
-        let user = yield user_1.default.findOne({ fullName: new RegExp(id, 'i') });
+        const { name } = req.body;
+        let smallName = name.toLowerCase();
+        let user = yield user_1.default.findOne({ name: new RegExp(id, 'i') });
         if (!user) {
             return res.status(404).send({ message: "user with id does not exist" });
         }
-        if (!fullName)
-            return res.status(404).send({ message: "Please provide fullName" });
-        const isUser = yield user_1.default.findOne({ fullName: smallName });
+        if (!name)
+            return res.status(404).send({ message: "Please provide name" });
+        const isUser = yield user_1.default.findOne({ name: smallName });
         if (isUser)
             return res.status(400).send({ message: "User with name already exists!" });
-        yield user.updateOne({ fullName: smallName });
+        yield user.updateOne({ name: smallName });
         yield user.save();
         return res.status(200).send({ message: "Successfully updated!!" });
     }
@@ -71,7 +71,7 @@ exports.updateHandler = updateHandler;
 const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        let user = yield user_1.default.findOne({ fullName: new RegExp(id, 'i') });
+        let user = yield user_1.default.findOne({ name: new RegExp(id, 'i') });
         if (!user) {
             return res.status(404).send({ message: "user with name does not exist" });
         }
