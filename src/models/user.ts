@@ -3,7 +3,7 @@ import { getModelForClass, index, prop } from "@typegoose/typegoose";
 @index({fullName:1})
 export class HngUser{
     @prop()
-    fullName: string
+    name: string
 }
 const UserModel = getModelForClass(HngUser, {
     schemaOptions:{
